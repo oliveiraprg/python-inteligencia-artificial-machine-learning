@@ -3,9 +3,10 @@ def linearSearch(listData, value):
     while (index < len(listData) and listData[index] < value):
         index = index + 1
         if value == listData[index]:
-            return f'Valor encontrado na posição {index}'
+            print(f'Valor encontrado na posição {index}')
+            return index
     if (index >= len(listData or listData[index] != value)):
-        return -1
+        return None
     return index
 
 

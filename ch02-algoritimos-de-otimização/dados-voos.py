@@ -149,6 +149,7 @@ def imprimir_voos(agenda):
     print('Preço total: ', total_preco)
 
 
+#Fitness Function
 def fitness_function(agenda):
     id_voo = -1
     total_preco = 0
@@ -168,3 +169,9 @@ fitness = mlrose.CustomFitness(fitness_function)
 
 problema = mlrose.DiscreteOpt(length=12, fitness_fn=fitness, maximize=False, max_val=10)
 
+#Hill climb 
+melhor_solucao, melhor_custo = mlrose.hill_climb(problema, random_state = 50)
+
+print(melhor_solucao, melhor_custo)
+
+imprimir_voos(melhor_solucao)

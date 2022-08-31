@@ -172,6 +172,4 @@ problema = mlrose.DiscreteOpt(length=12, fitness_fn=fitness, maximize=False, max
 #Hill climb 
 melhor_solucao, melhor_custo = mlrose.hill_climb(problema, random_state = 50)
 
-print(melhor_solucao, melhor_custo)
-
 imprimir_voos(melhor_solucao)

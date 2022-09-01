@@ -19,30 +19,29 @@ produtos = [('Refrigerador A', 0.751, 999.90 ),
 tamanho_total = 3.0
 
 def imprimir_produtos(produto):
-    freetados = []
-    total_preco = 0
-    total_tamanho = 0
+    valor_total = 0
+    espaco_ocupado = 0
     for i in range(len(produto)):
-        if produto[i] > 0:
-            nome_produto = produtos[i][0]
-            freetados.append(produtos[i])
-            tamanho = produtos[i][1]
-            valor = int(produtos[i][2])
-            total_preco += valor
-            total_tamanho += tamanho
-        if total_tamanho < tamanho_total and total_preco > 0 and len(freetados) > 3:
-            print(f'Tamanho do caminhão: {tamanho_total}M³ | Preço da carga R${total_preco} | Tamanho da carga {total_tamanho}M³')
-            print(f'itens:\n{freetados}\n') 
+        if produto[i] == 1:
+            nome_produto, tamanho, valor  = produtos[i]
+            print(f'Produto: {nome_produto} | Tamanho: {tamanho}M³ | Valor: R${valor}')
+        
+            valor_total += produtos[i][2]
+            espaco_ocupado += produtos[i][1]
+    if espaco_ocupado < tamanho_total:
+        print(f'Tamanho do caminhão: {tamanho_total}M³ | Preço da carga R${valor_total} | Tamanho da carga {espaco_ocupado}M³')
             
 #Fitness Function
 def fitness_function(produto):
-    total_preco = 0
+    custo = 0
+    soma_espaco = 0
     for i in range(len(produto)):
-        if produto[i] > 0:
-            valor = int(produtos[i][2])
-            total_preco += valor
-    
-    return total_preco
+        if produto[i] == 1:
+            custo += produtos[i][2]
+            soma_espaco += produtos[i][1]
+    if soma_espaco > tamanho_total:
+        custo = 1
+    return custo
 
 
 fitness = mlrose.CustomFitness(fitness_function)

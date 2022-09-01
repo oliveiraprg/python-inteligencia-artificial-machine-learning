@@ -170,6 +170,9 @@ fitness = mlrose.CustomFitness(fitness_function)
 problema = mlrose.DiscreteOpt(length=12, fitness_fn=fitness, maximize=False, max_val=10)
 
 #Hill climb 
-melhor_solucao, melhor_custo = mlrose.hill_climb(problema, random_state = 50)
+melhor_solucao_hill_climb, melhor_custo_hill_climb = mlrose.hill_climb(problema, random_state = 50)
+imprimir_voos(melhor_solucao_hill_climb)
 
-imprimir_voos(melhor_solucao)
+#simulated annealing 
+melhor_solucao_simulated_annealing, melhor_custo_simulated_annealing = mlrose.simulated_annealing(problema, schedule=mlrose.decay.GeomDecay(init_temp=10000))
+imprimir_voos(melhor_solucao_simulated_annealing)

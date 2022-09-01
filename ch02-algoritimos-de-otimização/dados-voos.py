@@ -146,7 +146,7 @@ def imprimir_voos(agenda):
         total_preco += volta[2]
         print('%10s%10s %5s-%5s %3s %5s-%5s %3s' % (nome, origem, ida[0], ida[1], ida[2],
                                                     volta[0], volta[1], volta[2]))
-    print('Preço total: ', total_preco)
+    print('Preço total: ', total_preco, ' Euros')
 
 
 #Fitness Function
@@ -170,9 +170,16 @@ fitness = mlrose.CustomFitness(fitness_function)
 problema = mlrose.DiscreteOpt(length=12, fitness_fn=fitness, maximize=False, max_val=10)
 
 #Hill climb 
+print('\nResultado dos melhores preços de voos usando algoritimos Hill climb.')
 melhor_solucao_hill_climb, melhor_custo_hill_climb = mlrose.hill_climb(problema, random_state = 50)
 imprimir_voos(melhor_solucao_hill_climb)
 
 #simulated annealing 
+print('\nResultado dos melhores preços de voos usando algoritimos Simulated annealing (Têmpera simulada).')
 melhor_solucao_simulated_annealing, melhor_custo_simulated_annealing = mlrose.simulated_annealing(problema, schedule=mlrose.decay.GeomDecay(init_temp=10000))
 imprimir_voos(melhor_solucao_simulated_annealing)
+
+#Algoritimo genetivo
+print('\nResultado dos melhores preços de voos usando algoritimos genetícos')
+melhor_solucao_genetic_alg, melhor_custo_genetic_alg = mlrose.genetic_alg(problema)
+imprimir_voos(melhor_solucao_genetic_alg)
